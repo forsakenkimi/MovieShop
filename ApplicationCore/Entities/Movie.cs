@@ -30,8 +30,7 @@ namespace ApplicationCore.Entities
         public string? CreatedBy { get; set; }
         public decimal? Rating { get; set; }
 
-        //public ICollection<Trailer> Trailers { get; set; }
-        
+        public ICollection<Trailer> Trailers { get; set; }   
         public ICollection<MovieGenre> GenresOfMovie { get; set; }
         public ICollection<MovieCrew> CrewsOfMovie { get; set; }
         public ICollection<MovieCast> CastsOfMovie { get; set; }
