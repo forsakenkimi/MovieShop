@@ -34,6 +34,7 @@ namespace ApplicationCore.Entities
         public ICollection<MovieGenre> GenresOfMovie { get; set; }
         public ICollection<MovieCrew> CrewsOfMovie { get; set; }
         public ICollection<MovieCast> CastsOfMovie { get; set; }
+        public ICollection<Purchase> UserOfPurchase { get; set; }
 
         //public ICollection<Favorite> Favorites { get; set; }
 
