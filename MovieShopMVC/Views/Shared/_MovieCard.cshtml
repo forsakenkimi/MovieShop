@@ -1,0 +1,8 @@
+﻿@model ApplicationCore.Models.MovieCard //need only 1 instance of MovieCard
+
+
+<div class = "card mb-4">
+   <a asp-controller=movies asp-action=details asp-route-id=@Model.Id>
+   <img src =@Model.PosterUrl alt=@Model.Title />
+   </a>
+</div>
