@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(MovieShopDbContext))]
-    partial class MovieShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220409060155_castCreating")]
+    partial class castCreating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,25 +176,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("Movie", (string)null);
                 });
 
-            modelBuilder.Entity("ApplicationCore.Entities.MovieCast", b =>
-                {
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CastId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Character")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("MovieId", "CastId", "Character");
-
-                    b.HasIndex("CastId");
-
-                    b.ToTable("MovieCast", (string)null);
-                });
-
             modelBuilder.Entity("ApplicationCore.Entities.MovieCrew", b =>
                 {
                     b.Property<int>("CrewId")
@@ -229,53 +212,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("GenreId");
 
                     b.ToTable("MovieGenre", (string)null);
-                });
-
-            modelBuilder.Entity("ApplicationCore.Entities.Trailer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(2084)
-                        .HasColumnType("nvarchar(2084)");
-
-                    b.Property<string>("TrailerUrl")
-                        .IsRequired()
-                        .HasMaxLength(2084)
-                        .HasColumnType("nvarchar(2084)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("Trailer");
-                });
-
-            modelBuilder.Entity("ApplicationCore.Entities.MovieCast", b =>
-                {
-                    b.HasOne("ApplicationCore.Entities.Cast", "Cast")
-                        .WithMany("MoviesOfCast")
-                        .HasForeignKey("CastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ApplicationCore.Entities.Movie", "Movie")
-                        .WithMany("CastsOfMovie")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cast");
-
-                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.MovieCrew", b =>
@@ -316,22 +252,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Entities.Trailer", b =>
-                {
-                    b.HasOne("ApplicationCore.Entities.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Movie");
-                });
-
-            modelBuilder.Entity("ApplicationCore.Entities.Cast", b =>
-                {
-                    b.Navigation("MoviesOfCast");
-                });
-
             modelBuilder.Entity("ApplicationCore.Entities.Crew", b =>
                 {
                     b.Navigation("MoviesOfCrew");
@@ -339,8 +259,6 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("ApplicationCore.Entities.Movie", b =>
                 {
-                    b.Navigation("CastsOfMovie");
-
                     b.Navigation("CrewsOfMovie");
 
                     b.Navigation("GenresOfMovie");
