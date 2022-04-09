@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Contracts.Repositories
 {
+    //This is a base interface with basic CRUD functionalities
     public interface IRepository<T> where T : class
     {
-        //This is a base interface with basic CRUD functionalities
-
+        
         //Get record by id
         T GetById(int id);
         
