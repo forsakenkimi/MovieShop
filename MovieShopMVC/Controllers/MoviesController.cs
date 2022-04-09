@@ -4,7 +4,8 @@ namespace MovieShopMVC.Controllers
 {
     public class MoviesController : Controller
     {
-        public IActionResult Index()
+        //localhost//movies/detail/Id
+        public IActionResult Details(int id)
         {
             return View();
         }
