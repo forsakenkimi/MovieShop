@@ -12,7 +12,7 @@ namespace ApplicationCore.Entities
     public class Genre
     {
         /// <summary>
-        /// /
+        /// ////
         /// </summary>
         public int Id { get; set; }
 
