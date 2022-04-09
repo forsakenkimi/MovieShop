@@ -12,7 +12,7 @@ namespace Infrastructure.Data
     {
         public MovieShopDbContext(DbContextOptions<MovieShopDbContext> options): base(options)
         {
-            //
+            ////
         }
 
         public DbSet<Genre> Genres { get; set; }
