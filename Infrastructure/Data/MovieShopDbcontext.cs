@@ -22,7 +22,7 @@ namespace Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Movie>(ConfigureMovie);
-
+            modelBuilder.Entity<MovieGenre>(ConfigureMovieGenre);
         }
 
         private void ConfigureMovie(EntityTypeBuilder<Movie> builder)
@@ -44,6 +44,11 @@ namespace Infrastructure.Data
             builder.Ignore(m => m.Rating);
         }
 
+        private void ConfigureMovieGenre(EntityTypeBuilder<MovieGenre> builder)
+        {
+            builder.ToTable("MovieGenre");
+            builder.HasKey(mg => new { mg.MovieId, mg.GenreId });
+        }
     }
 }
 

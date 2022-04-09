@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IMovieService, MovieService>();
+//builder.Services.AddScoped<IMovieService, MovieService>();
 
 builder.Services.AddDbContext<MovieShopDbContext>(Options =>
 {
