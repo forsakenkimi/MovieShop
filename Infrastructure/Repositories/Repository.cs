@@ -10,7 +10,7 @@ namespace Infrastructure.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        //implement IRpository and inject instance of MovieShopDbContext
+        //implement IRpository and inject instance of MovieShopDbContext (for display DI, will be use later on)
 
         protected readonly MovieShopDbContext _dbContext;
         public Repository(MovieShopDbContext dbContext)
