@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.Contracts.Repositories;
 using ApplicationCore.Entities;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,13 @@ namespace Infrastructure.Repositories
         public IEnumerable<Movie> Get30HighestRatedMovies()
         {
             throw new NotImplementedException();
+        }
+
+        public override Movie GetById(int id)
+        {
+            var movie = _dbContext.Movies.Include(m => m.GenresOfMovie).ThenInclude(m => m.Genre).Include(m => m.CastsOfMovie).ThenInclude(m => m.Cast).Include(m => m.Trailers).FirstOrDefault(m => m.Id == id);
+            //include => join with junction table; theninclude => join with the other table in the junction table  
+            return movie;
         }
     }
 
