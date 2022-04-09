@@ -11,9 +11,7 @@ namespace ApplicationCore.Entities
     [Table("Genre")]
     public class Genre
     {
-        /// <summary>
-        /// ////
-        /// </summary>
+        
         public int Id { get; set; }
 
         [MaxLength(64)]
