@@ -1,22 +1,52 @@
 ﻿@model ApplicationCore.Models.MovieDetailModel
 
-<h1>
-    @Model.Title
-</h1>
-
-<h3>
-    @Model.Overview
-</h3>
-
-<h3>
-    @foreach (var cast in @Model.Casts)
-    {
-        <span>@cast.Character</span>
+<style>
+    #detailsbackimg{
+        background-image: url("@Model.BackdropUrl");
+        background-size: auto auto;
     }
 
-</h3>
+    @{
+        string[] timeArr = Model.ReleaseDate.ToString().Split("-");
 
+}
+</style>
 
-<h3>
-    @Model.Rating
-</h3>
+<div >
+    <div class="container-fluid" >
+        <div class="row" id="detailsbackimg">
+            <div class="col-3 ps-0">
+                <img class="img-fluid" src = "@Model.PosterUrl"/>
+            </div>
+
+            <div class="col-6" >
+                <p class="fs-2 text-white">@Model.Title</p>
+                <p class="fs-6 text-secondary">@Model.Tagline</p>
+                <span class="fs-6 text-secondary"> @Model.RunTime m | @timeArr[0] </span>  
+                @foreach (var genre in Model.Genres)
+                {
+                    <span class="badge bg-secondary">@genre.Name</span>
+                }
+                <div>
+                    <h3><span class="badge bg-success">@Model.Rating.ToString().Substring(0,3)</span></h3>
+                </div>
+                <p class="text-white">
+                    @Model.Overview
+                </p>
+            </div>
+            <div class="col-3 position-relative pt-5">
+                    <button class="btn btn-dark w-100" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg>Review</button>
+                    <br/>
+                    <br/>
+                    <button class="btn btn-light w-100" type="button">BUY $@Model.Price</button>      
+            </div>            
+        </div>  
+        <div>
+            123
+        </div>
+    </div>
+</div>
+

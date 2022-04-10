@@ -3,6 +3,7 @@ using ApplicationCore.Contracts.Services;
 using ApplicationCore.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -82,22 +83,22 @@ namespace Infrastructure.Services
                     ProfilePath = cast.Cast.ProfilePath,
                     Character = cast.Character,
                 });
-            }
+            }           
 
-            return movieDetails;
-
+            
             movieDetails.Genres = new List<GenreModel>();
 
             foreach (var genre in movie.GenresOfMovie)
-            {
+            {               
                 movieDetails.Genres.Add(new GenreModel
                 {
+                    
                     Id = genre.GenreId,
                     Name = genre.Genre.Name,
                 });
             }
             
-
+            return movieDetails;
         }
     }
 }
