@@ -31,6 +31,7 @@ namespace Infrastructure.Repositories
         {
             var movie = _dbContext.Movies.Include(m => m.GenresOfMovie).ThenInclude(m => m.Genre).Include(m => m.CastsOfMovie).ThenInclude(m => m.Cast).Include(m => m.Trailers).FirstOrDefault(m => m.Id == id);
             //include => join with junction table; theninclude => join with the other table in the junction table  
+            //
 
             movie.Rating = _dbContext.Reviews.Where(m => m.MovieId == id).Average(m =>m.Rating);
             return movie;
