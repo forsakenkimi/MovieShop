@@ -1,4 +1,22 @@
-﻿<h2>
+﻿@model ApplicationCore.Models.MovieDetailModel
 
-    movie details
-</h2>
+<h1>
+    @Model.Title
+</h1>
+
+<h3>
+    @Model.Overview
+</h3>
+
+<h3>
+    @foreach (var cast in @Model.Casts)
+    {
+        <span>@cast.Character</span>
+    }
+
+</h3>
+
+
+<h3>
+    @Model.Rating
+</h3>
