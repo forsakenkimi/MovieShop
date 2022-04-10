@@ -12,6 +12,7 @@ namespace MovieShopMVC.Controllers
         {
             _movieService = movieService;
         }
+        [HttpGet]
         public IActionResult Details(int id)
         {
             var movieDetails = _movieService.GetMovieDetails(id);

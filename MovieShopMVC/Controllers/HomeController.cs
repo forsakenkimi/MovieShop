@@ -14,13 +14,13 @@ namespace MovieShopMVC.Controllers
             _logger = logger;
             _movieService = movieService;  
         }
-
+        [HttpGet]
         public IActionResult Index()
         {
             var movies = _movieService.Get30HighestGrossingMovies();
             return View(movies);
         }
-
+        [HttpGet]
         public IActionResult Privacy()
         {
             return View();
