@@ -89,8 +89,27 @@
                             </li>
                         </ul>
                     </div> 
-                    <div class= "col-9">
-                        aaa
+                    <div class= "col-6">
+                        <h3>CAST</h3>
+                        <ul class="list-group list-group-flush borderless">
+                            @foreach(var cast in Model.Casts)
+                            {
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <img class="w-50" src= @cast.ProfilePath />
+                                        </div>
+                                        <div class="col-6">
+                                            <span>@cast.Name</span>
+                                        </div>
+                                        <div class="col-4">
+                                            <span>@cast.Character</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            
+                        </ul>
                     </div>
                 </div>
             </div>          
