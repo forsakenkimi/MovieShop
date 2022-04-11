@@ -16,24 +16,24 @@ namespace Infrastructure.Repositories
         {
         }
 
-        public IEnumerable<Movie> Get30HighestGrossingMovies()
+        public async Task<IEnumerable<Movie>> Get30HighestGrossingMovies()
         {
-            var movies = _dbContext.Movies.OrderByDescending(m=>m.Revenue).Take(30).ToList();
+            var movies = await _dbContext.Movies.OrderByDescending(m=>m.Revenue).Take(30).ToListAsync();
             return movies;
         }
 
-        public IEnumerable<Movie> Get30HighestRatedMovies()
+        public async Task<IEnumerable<Movie>> Get30HighestRatedMovies()
         {
             throw new NotImplementedException();
         }
 
-        public override Movie GetById(int id)
+        public override async Task<Movie> GetById(int id)
         {
-            var movie = _dbContext.Movies.Include(m => m.GenresOfMovie).ThenInclude(m => m.Genre).Include(m => m.CastsOfMovie).ThenInclude(m => m.Cast).Include(m => m.Trailers).FirstOrDefault(m => m.Id == id);
+            var movie = await _dbContext.Movies.Include(m => m.GenresOfMovie).ThenInclude(m => m.Genre).Include(m => m.CastsOfMovie).ThenInclude(m => m.Cast).Include(m => m.Trailers).FirstOrDefaultAsync(m => m.Id == id);
             //include => join with junction table; theninclude => join with the other table in the junction table  
             //
 
-            movie.Rating = _dbContext.Reviews.Where(m => m.MovieId == id).Average(m =>m.Rating);
+            movie.Rating = await _dbContext.Reviews.Where(m => m.MovieId == id).AverageAsync(m =>m.Rating);
             return movie;
         }
     }

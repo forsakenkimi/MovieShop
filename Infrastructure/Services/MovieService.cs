@@ -20,9 +20,9 @@ namespace Infrastructure.Services
             _movieRepository = movieRepository;
         }
 
-        public List<MovieCardModel> Get30HighestGrossingMovies()
+        public async Task<List<MovieCardModel>> Get30HighestGrossingMovies()
         {
-            var movies = _movieRepository.Get30HighestGrossingMovies();
+            var movies = await _movieRepository.Get30HighestGrossingMovies();
             //AutoMapper
             var movieCards = new List<MovieCardModel>();
             foreach (var movie in movies)
@@ -38,9 +38,9 @@ namespace Infrastructure.Services
         }
 
         //before async
-         public MovieDetailModel GetMovieDetails(int id)
+         public async Task<MovieDetailModel> GetMovieDetails(int id)
         {
-            var movie = _movieRepository.GetById(id);
+            var movie = await _movieRepository.GetById(id);
 
             var movieDetails = new MovieDetailModel
             {
