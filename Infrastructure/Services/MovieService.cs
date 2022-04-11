@@ -37,6 +37,7 @@ namespace Infrastructure.Services
             return movieCards;
         }
 
+        //before async
          public MovieDetailModel GetMovieDetails(int id)
         {
             var movie = _movieRepository.GetById(id);
