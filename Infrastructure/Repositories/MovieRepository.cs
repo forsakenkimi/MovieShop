@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Contracts.Repositories;
 using ApplicationCore.Entities;
+using ApplicationCore.Models;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -35,6 +36,21 @@ namespace Infrastructure.Repositories
 
             movie.Rating = await _dbContext.Reviews.Where(m => m.MovieId == id).AverageAsync(m =>m.Rating);
             return movie;
+        }
+
+        public async Task<PagedResultSet<Movie>> GetMoviesByGenres(int id, int pageSize = 30, int pageNumber = 1)
+        {
+            int totalMoviesCountByGenre = await _dbContext.MovieGenres.Where(mg => mg.GenreId == id).CountAsync();
+
+            if (totalMoviesCountByGenre == 0)
+            {
+                throw new Exception("No Movies Found For That Genre");
+            }
+            List<Movie> movies = await _dbContext.MovieGenres.Where(mg => mg.GenreId == id).Include(mg => mg.Movie).Select(mg => new Movie {Id = mg.MovieId, Title= mg.Movie.Title, PosterUrl = mg.Movie.PosterUrl})
+                .Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            PagedResultSet<Movie> pagedMovies = new PagedResultSet<Movie>(movies, pageNumber, pageSize, totalMoviesCountByGenre);
+            return pagedMovies;
         }
     }
 
