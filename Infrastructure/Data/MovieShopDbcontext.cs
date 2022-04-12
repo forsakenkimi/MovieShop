@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace Infrastructure.Data
 
         }
 
+        
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<MovieGenre> MovieGenres { get; set; }
@@ -30,6 +32,9 @@ namespace Infrastructure.Data
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<Review> Reviews{ get; set; }
+        //test for log to debug window
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //=> optionsBuilder.LogTo(message => Debug.WriteLine(message + "testtest"));
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
