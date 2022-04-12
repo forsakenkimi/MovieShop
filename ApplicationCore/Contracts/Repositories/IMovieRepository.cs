@@ -13,5 +13,8 @@ namespace ApplicationCore.Contracts.Repositories
         Task<IEnumerable<Movie>> Get30HighestGrossingMovies();
 
         Task<IEnumerable<Movie>> Get30HighestRatedMovies();
+
+        Task<> GetMoviesByGenres(int id, int pageSize = 30 int pageNumber = 1);
     }
+
 }
