@@ -1,0 +1,11 @@
+﻿@model ApplicationCore.Models.CastDetailModel
+
+@Model.Name
+<br/>
+@Model.Gender
+<br/>
+@foreach(var movie in Model.Movies)
+{
+    <div>@movie.Title</div>
+
+} 
