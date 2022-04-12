@@ -5,6 +5,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +41,8 @@ namespace Infrastructure.Repositories
 
         public async Task<PagedResultSet<Movie>> GetMoviesByGenres(int id, int pageSize = 30, int pageNumber = 1)
         {
-            int totalMoviesCountByGenre = await _dbContext.MovieGenres.Where(mg => mg.GenreId == id).CountAsync();
+            //Debug.WriteLine(_dbContext.MovieGenres.Where(mg => mg.GenreId == id).Count());
+            var totalMoviesCountByGenre = await _dbContext.MovieGenres.Where(mg => mg.GenreId == id).CountAsync();
 
             if (totalMoviesCountByGenre == 0)
             {
