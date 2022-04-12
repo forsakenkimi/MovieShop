@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Contracts.Repositories;
 using ApplicationCore.Contracts.Services;
+using ApplicationCore.Entities;
 using ApplicationCore.Models;
 using System;
 using System.Collections.Generic;
@@ -100,6 +101,14 @@ namespace Infrastructure.Services
             }
             
             return movieDetails;
+        }
+
+        public async Task<PagedResultSet<MovieCardModel>> GetMoviesByGenrePagination(int genreId, int pageSize = 30, int pageNumber = 1)
+        {
+            PagedResultSet<Movie> pagedMovies = await _movieRepository.GetMoviesByGenres(genreId, pageSize, pageNumber);
+            List<MovieCardModel> MovieCards = new List<MovieCardModel>();
+            MovieCards.AddRange(pagedMovies.Data.Select(m => new MovieCardModel { Id = m.Id, Title = m.Title, PosterUrl = m.PosterUrl }));
+            return new PagedResultSet<MovieCardModel>(MovieCards, pageNumber, pageSize,pagedMovies.Count);
         }
     }
 }
