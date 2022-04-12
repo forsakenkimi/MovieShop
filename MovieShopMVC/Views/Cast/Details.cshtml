@@ -1,11 +1,35 @@
 ﻿@model ApplicationCore.Models.CastDetailModel
 
-@Model.Name
-<br/>
-@Model.Gender
-<br/>
-@foreach(var movie in Model.Movies)
-{
-    <div>@movie.Title</div>
+@{
+    int idx = 1;
+}
 
-} 
+<table class="table table-dark table-hover">
+  <caption>@Model.Name's Movies</caption>
+    <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Budget</th>
+          <th scope="col">Revenue</th>
+          <th scope="col">Release Date</th>
+          <th scope="col">Language</th>
+          <th scope="col">Run Time</th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach (var movie in Model.Movies)
+            {
+                  <tr>
+                  <th scope="row">@idx</th>
+                  <td>@movie.Title</td>
+                  <td>$@Math.Round(movie.Budget.GetValueOrDefault())</td>
+                  <td>$@Math.Round(movie.Revenue.GetValueOrDefault())</td>
+                  <td>@movie.ReleaseDate.ToString().Substring(0,10)</td>
+                  <td>@movie.OriginalLanguage</td>
+                  <td>@movie.RunTime m</td>
+                  </tr>
+                  idx = idx + 1;
+            }
+    </tbody>
+</table>
