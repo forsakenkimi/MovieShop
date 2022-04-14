@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApplicationCore.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,8 @@ namespace ApplicationCore.Contracts.Services
 {
     public interface IAccountService
     {
+        public Task<bool> ValidateUser(string email, string password);
+
+        public Task<bool> RegisterUser(RegisterModel model);
     }
 }
