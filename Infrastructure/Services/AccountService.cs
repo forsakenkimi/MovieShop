@@ -42,7 +42,7 @@ namespace Infrastructure.Services
             return true;
         }
 
-        public async Task<bool> ValidateUser(string email, string password)
+        public async Task<UserInfoModel> ValidateUser(string email, string password)
         {
             var user = await _userRepository.GetUserByEmail(email);
             if (user == null)
@@ -52,11 +52,15 @@ namespace Infrastructure.Services
             var hashPassword = GetHashedPassword(password, user.Salt);
             if (hashPassword == user.HashedPassword)
             {
-                return true;
-            }else
-            {
-                return false;
+                var userInfo = new UserInfoModel() { 
+                    Email = user.Email,
+                    Id = user.Id,  
+                    FirstName = user.FirstName,
+                    LastName= user.LastName,
+                    DateOfBirth = user.DateOfBirth.GetValueOrDefault(),
+                };
             }
+            throw new Exception("Email/Password does not match");
         }
 
         private string GetRandomSalt()

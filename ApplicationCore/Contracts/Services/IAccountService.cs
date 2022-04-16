@@ -9,7 +9,7 @@ namespace ApplicationCore.Contracts.Services
 {
     public interface IAccountService
     {
-        public Task<bool> ValidateUser(string email, string password);
+        public Task<UserInfoModel> ValidateUser(string email, string password);
 
         public Task<bool> RegisterUser(RegisterModel model);
     }
