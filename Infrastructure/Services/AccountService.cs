@@ -57,8 +57,9 @@ namespace Infrastructure.Services
                     Id = user.Id,  
                     FirstName = user.FirstName,
                     LastName= user.LastName,
-                    DateOfBirth = user.DateOfBirth.GetValueOrDefault(),
+                    DateOfBirth = user.DateOfBirth.GetValueOrDefault(),                   
                 };
+                return userInfo;
             }
             throw new Exception("Email/Password does not match");
         }
