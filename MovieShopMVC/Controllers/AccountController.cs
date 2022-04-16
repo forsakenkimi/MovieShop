@@ -14,13 +14,14 @@ namespace MovieShopMVC.Controllers
         }
         [HttpGet]
         public async Task<IActionResult> Login()
-        {
+        {         
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel model)
         {
+            var IsLoggedIn = _accountService.ValidateUser(model.Email, model.Password);
             return View();
         }
 

@@ -42,9 +42,21 @@ namespace Infrastructure.Services
             return true;
         }
 
-        public Task<bool> ValidateUser(string email, string password)
+        public async Task<bool> ValidateUser(string email, string password)
         {
-            throw new NotImplementedException();
+            var user = await _userRepository.GetUserByEmail(email);
+            if (user == null)
+            {
+                throw new Exception("Email Does Not Exsit");
+            }
+            var hashPassword = GetHashedPassword(password, user.Salt);
+            if (hashPassword == user.HashedPassword)
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
         }
 
         private string GetRandomSalt()
