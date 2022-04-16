@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.Contracts.Services;
 using ApplicationCore.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace MovieShopMVC.Controllers
 {
@@ -21,7 +22,11 @@ namespace MovieShopMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel model)
         {
-            var IsLoggedIn = _accountService.ValidateUser(model.Email, model.Password);
+            var user = _accountService.ValidateUser(model.Email, model.Password);
+            var claims = new List<Claim> {
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.GivenName, user.),
+            };
             return View();
         }
 
