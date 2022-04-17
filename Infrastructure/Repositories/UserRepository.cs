@@ -21,5 +21,10 @@ namespace Infrastructure.Repositories
             var user = await  _dbContext.Users.FirstOrDefaultAsync(x => x.Email == email);
             return user;
         }
+
+        public async Task<IEnumerable<Purchase>> GetAllPurchasesForUser(int id) {
+            var purchases = await _dbContext.Purchases.Where(p => p.UserId == id).ToListAsync();
+            return purchases;
+        }
     }
 }
