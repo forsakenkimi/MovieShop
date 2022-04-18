@@ -18,6 +18,17 @@ namespace Infrastructure.Services
         {
             _userRepository = userRepository;
         }
+
+        public async Task<List<int>> GetAllPurchasesMovieId(int userId)
+        {
+            var purchases = await _userRepository.GetAllPurchasesForUser(userId);
+            var MovieIdList = new List<int>();
+            foreach (var purchase in purchases)
+            {
+                MovieIdList.Add(purchase.MovieId);
+            }
+            return MovieIdList;
+        }
         public async Task<IEnumerable<PurchaseMovieCardModel>> PurchaseMovie(int userId)
         {
             var purchaseMovieCard = new List<PurchaseMovieCardModel>();
@@ -85,5 +96,7 @@ namespace Infrastructure.Services
             var movieCards = _userRepository.GetAllFavoritesMovieCardForUser(userId);
             return movieCards;
         }
+
+        
     }
 }

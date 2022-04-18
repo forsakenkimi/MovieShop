@@ -10,6 +10,7 @@ namespace ApplicationCore.Contracts.Services
 {
     public interface IUserService
     {
+        Task<List<int>> GetAllPurchasesMovieId(int userId);
         Task<IEnumerable<PurchaseMovieCardModel>> PurchaseMovie(int UserId);
 
         Task<bool> IsMoviePurchased(int userId, int movieId);

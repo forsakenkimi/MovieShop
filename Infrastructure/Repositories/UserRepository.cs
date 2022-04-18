@@ -96,7 +96,7 @@ namespace Infrastructure.Repositories
                 
             };
             return movieCards;
-
         }
+
     }
 }
