@@ -1,7 +1,9 @@
-﻿@using MovieShopMVC.Services
+﻿@using ApplicationCore.Contracts.Services
+@using MovieShopMVC.Services
 @model ApplicationCore.Models.MovieDetailModel
 
 @inject ICurrentUser currentUser;
+@inject IUserService userService;
 
 <style>
     #detailsbackimg{
@@ -15,6 +17,10 @@
         string[] releaseDateArr =Model.ReleaseDate.ToString().Split(" ");
         decimal boxOffice = Math.Round(Model.Revenue.GetValueOrDefault(),2);
         decimal budget = Math.Round(Model.Budget.GetValueOrDefault(),2);
+        bool isLoggedIn = currentUser.IsAuthenticated;
+
+
+
         List<int> movieIds = new List<int>();
         String? review = "no review";
         <!-- -1 == no user  if there is an user, get the movieId list -->
@@ -73,7 +79,7 @@
                 
             </div>
             <div class="col-3 position-relative pt-5">
-                @if (userId == -1)
+                @if (!isLoggedIn)
                 {
                     <partial name = "_NoLoggedIn"/>
                 }else
