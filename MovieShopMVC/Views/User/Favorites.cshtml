@@ -1,8 +1,6 @@
-﻿@model List<ApplicationCore.Models.PurchaseMovieCardModel>
-
-
+﻿@model List<ApplicationCore.Models.MovieCardModel>
 @{
-    ViewData["Title"] = "Purchase Page";
+    ViewData["Title"] = "Favorites Page";
 }
 
 <div class="rounded">
@@ -12,7 +10,7 @@
             @foreach (var movie in Model)
             {               
                 <div class="col-xl-2 col-sm-4 col-md-3 col-6 m-0">
-                    <partial name = "_MovieCard" model = "movie.movieCard"/>
+                    <partial name = "_MovieCard" model = "movie"/>
                 </div>
             }          
         </div>

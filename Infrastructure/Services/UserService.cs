@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Contracts.Repositories;
 using ApplicationCore.Contracts.Services;
+using ApplicationCore.Entities;
 using ApplicationCore.Models;
 using System;
 using System.Collections.Generic;
@@ -41,9 +42,48 @@ namespace Infrastructure.Services
                 });
             }
             return purchaseMovieCard;
+        }
+        public async Task<bool> IsMoviePurchased(int userId, int movieId)
+        {
+            var purchases = await _userRepository.GetAllPurchasesForUser(userId);
+            foreach (var purchase in purchases)
+            {
+                if (purchase.Id == movieId)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
+        public async Task<Favorite> AddFavorite(int userId, int movieId)
+        {
+            var fav = await _userRepository.AddUserMovieFavorite(userId, movieId);
+            return fav;
+        }
 
+        public async Task RemoveFavorite(int userId, int movieId)
+        {
+            await _userRepository.RemoveMovieFavorite(userId, movieId);
+        }
 
+        public async Task<bool> FavoriteExists(int userId, int movieId)
+        {
+            var favorites = await _userRepository.GetAllFavoritesForUser(userId);
+            foreach (var favorite in favorites)
+            {
+                if (favorite.MovieId == movieId)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Task<List<MovieCardModel>> GetAllFavoritesMovieCard(int userId)
+        {
+            var movieCards = _userRepository.GetAllFavoritesMovieCardForUser(userId);
+            return movieCards;
         }
     }
 }

@@ -54,5 +54,49 @@ namespace Infrastructure.Repositories
             };
             return puchaseMovieDetail;
         }
+
+        public async Task<Favorite> AddUserMovieFavorite(int userId, int movieId)
+        {
+            Favorite fav = new Favorite { 
+                Id = userId,
+                MovieId = movieId,
+            };
+            _dbContext.Set<Favorite>().Add(fav);
+            await _dbContext.SaveChangesAsync();
+            return fav;
+        }
+
+        public async Task RemoveMovieFavorite(int userId, int movieId)
+        {
+            var MovieFavorite = await _dbContext.Favorites.Where(m => m.MovieId == movieId).Where(m => m.UserId == userId).FirstOrDefaultAsync();
+            if (MovieFavorite != null)
+            {
+                _dbContext.Set<Favorite>().Remove(MovieFavorite);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
+        public async Task<List<Favorite>> GetAllFavoritesForUser(int userId)
+        {
+            var favorites = await _dbContext.Favorites.Where(f => f.UserId == userId).ToListAsync();
+            return favorites;
+        }
+
+        public async Task<List<MovieCardModel>> GetAllFavoritesMovieCardForUser(int userId)
+        {
+            var favoriteMovies = await _dbContext.Favorites.Include(f => f.Movie).ToListAsync();
+            List<MovieCardModel> movieCards = new List<MovieCardModel>();
+            foreach (var favoriteMovie in favoriteMovies)
+            {
+                movieCards.Add(new MovieCardModel { 
+                    Id = favoriteMovie.Movie.Id,
+                    Title = favoriteMovie.Movie.Title,
+                    PosterUrl = favoriteMovie.Movie.PosterUrl,
+                });
+                
+            };
+            return movieCards;
+
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace MovieShopMVC.Controllers
         public async Task<IActionResult> Purchases()
         {
             //int userId = GetUserId();
-            var purchaseMovieCard = await _userService.PurchaseMovie(32882);
+            var purchaseMovieCard = await _userService.PurchaseMovie(15643);
             return View(purchaseMovieCard);
         }
 
@@ -32,7 +32,9 @@ namespace MovieShopMVC.Controllers
         public async Task<IActionResult> Favorites()
         {
             //int userId = GetUserId();
-            return View();
+            int userId = 1;
+            var movieCards = _userService.GetAllFavoritesMovieCard(userId);
+            return View(movieCards);
         }
     }
 }

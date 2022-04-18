@@ -13,5 +13,9 @@ namespace ApplicationCore.Contracts.Repositories
         Task<User> GetUserByEmail(string email);
         Task<List<Purchase>> GetAllPurchasesForUser(int id);
         Task<PurchaseMovieDetailModel> GetPurchasesDetails(int userId, int movieId);
+        Task<Favorite> AddUserMovieFavorite(int userId, int movieId);
+        Task RemoveMovieFavorite(int userId, int movieId);
+        Task <List<Favorite>> GetAllFavoritesForUser(int userId);
+        Task<List<MovieCardModel>> GetAllFavoritesMovieCardForUser(int userId);
     }
 }
