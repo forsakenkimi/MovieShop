@@ -1,4 +1,5 @@
 ﻿@using ApplicationCore.Contracts.Services
+@using ApplicationCore.Entities
 @using MovieShopMVC.Services
 @model ApplicationCore.Models.MovieDetailModel
 
@@ -13,44 +14,28 @@
 
     @{
         int? userId;
+        List<int> movieIdList = new List<int>();
+        List<Review> movieReviewList = new List<Review>();
         string[] timeArr = Model.ReleaseDate.ToString().Split("-");
         string[] releaseDateArr =Model.ReleaseDate.ToString().Split(" ");
         decimal boxOffice = Math.Round(Model.Revenue.GetValueOrDefault(),2);
         decimal budget = Math.Round(Model.Budget.GetValueOrDefault(),2);
         bool isLoggedIn = currentUser.IsAuthenticated;
-
-
-
-        List<int> movieIds = new List<int>();
-        String? review = "no review";
-        <!-- -1 == no user  if there is an user, get the movieId list -->
-        if (ViewData.ContainsKey("userId"))
+        if (isLoggedIn)
         {
-            userId = (int)ViewData["userId"];
-            if (ViewData.ContainsKey("movieIds"))
-            {
-                foreach (var id in ViewData["movieIds"] as List<int>)
-                {
-                    movieIds.Add(id);
-                }
-            }
-            if (ViewData.ContainsKey("reviews"))
-            {
-                foreach (var rev in ViewData["reviews"] as List<ApplicationCore.Entities.Review>)
-                {
-                    if(rev.MovieId == Model.Id)
-                    {
-                        review = rev.ReviewText;
-                    }
-                }
-            }
-
+            userId = currentUser.UserId;
+            movieIdList = await userService.GetAllPurchasesMovieId(userId.GetValueOrDefault());
+            movieReviewList = await userService.GetAllReviewsByUserId(userId.GetValueOrDefault());
         }
-        else
+        Review rev = new Review();
+        foreach (var review in movieReviewList)
         {
-            userId = -1;
+            if (review.MovieId == Model.Id)
+            {
+                rev = review;
+            }
         }
-        
+
 
 }
 </style>
@@ -84,7 +69,8 @@
                     <partial name = "_NoLoggedIn"/>
                 }else
                 {
-                    if (review == "no review") 
+                    <!-- review-->
+                    if (rev.MovieId == 0) 
                     {
                         <partial name = "_NoReviewButton"/>                        
                     }
@@ -95,8 +81,8 @@
                     
                     <br/>
                     <br/>
-                    <!-- has review-->
-                    if (movieIds.Contains(Model.Id)){
+                    
+                    if (movieIdList.Contains(Model.Id)){
                         <partial name = "_WatchButton" model=Model/>
                     }else
                     {

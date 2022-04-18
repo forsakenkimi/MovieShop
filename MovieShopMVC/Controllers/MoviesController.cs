@@ -27,11 +27,7 @@ namespace MovieShopMVC.Controllers
             {
             }else
             {
-                int userId = Convert.ToInt32(this.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
-                ViewData["userId"] = userId;
-                ViewData["movieIds"] = await _userService.GetAllPurchasesMovieId(userId);
-                ViewData["reviews"] = await _userService.GetAllReviewsByUserId(userId);
-                
+                int userId = Convert.ToInt32(this.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);                
             }
              
             return View(movieDetails);
