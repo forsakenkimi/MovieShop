@@ -34,7 +34,7 @@ namespace MovieShopMVC.Controllers
         {
             //int userId = GetUserId();
             int userId = 1;
-            var movieCards = _userService.GetAllFavoritesMovieCard(userId);
+            var movieCards = await _userService.GetAllFavoritesMovieCard(userId);
             return View(movieCards);
         }
     }
