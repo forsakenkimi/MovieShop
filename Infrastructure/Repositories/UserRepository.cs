@@ -113,9 +113,10 @@ namespace Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Review> GetAllReviewsByUser(int userId)
+        public async Task<List<Review>> GetAllReviewsByUser(int userId)
         {
-            throw new NotImplementedException();
+            var reviews =  await _dbContext.Reviews.Where(r => r.UserId == userId).ToListAsync();
+            return reviews;
         }
     }
 }

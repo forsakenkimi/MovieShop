@@ -13,6 +13,7 @@
         decimal boxOffice = Math.Round(Model.Revenue.GetValueOrDefault(),2);
         decimal budget = Math.Round(Model.Budget.GetValueOrDefault(),2);
         List<int> movieIds = new List<int>();
+        String? review = "no review";
         <!-- -1 == no user  if there is an user, get the movieId list -->
         if (ViewData.ContainsKey("userId"))
         {
@@ -24,7 +25,17 @@
                     movieIds.Add(id);
                 }
             }
-            
+            if (ViewData.ContainsKey("reviews"))
+            {
+                foreach (var rev in ViewData["reviews"] as List<ApplicationCore.Entities.Review>)
+                {
+                    if(rev.MovieId == Model.Id)
+                    {
+                        review = rev.ReviewText;
+                    }
+                }
+            }
+
         }
         else
         {
@@ -64,23 +75,24 @@
                     <partial name = "_NoLoggedIn"/>
                 }else
                 {
+                    if (review == "no review") 
+                    {
+                        <partial name = "_NoReviewButton"/>                        
+                    }
+                    else
+                    {
+                        <partial name = "_ReviewButton"/>
+                    }
+                    
+                    <br/>
+                    <br/>
+                    <!-- has review-->
                     if (movieIds.Contains(Model.Id)){
                         <partial name = "_WatchButton" model=Model/>
                     }else
                     {
                         <partial name = "_BuyButton" model=Model/>
                         
-                    }
-                    <br/>
-                    <br/>
-                    <!-- has review-->
-                    if (false) 
-                    {    
-                        <partial name = "_ReviewButton"/>
-                    }
-                    else
-                    {
-                        <partial name = "_NoReviewButton"/>
                     }
                     
                     

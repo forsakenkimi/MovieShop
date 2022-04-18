@@ -22,6 +22,6 @@ namespace ApplicationCore.Contracts.Services
 
         Task<List<MovieCardModel>> GetAllFavoritesMovieCard(int userId);
 
-
+        Task<List<Review>> GetAllReviewsByUserId(int userId);
     }
 }

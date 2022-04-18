@@ -97,6 +97,9 @@ namespace Infrastructure.Services
             return movieCards;
         }
 
-        
+        public Task<List<Review>> GetAllReviewsByUserId(int userId)
+        {
+            return _userRepository.GetAllReviewsByUser(userId);
+        }
     }
 }
