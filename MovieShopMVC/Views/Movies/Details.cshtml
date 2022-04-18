@@ -1,5 +1,8 @@
-﻿@model ApplicationCore.Models.MovieDetailModel
+﻿@using MovieShopMVC.Services
+@model ApplicationCore.Models.MovieDetailModel
 
+@inject ICurrentUser currentUser;
+@
 <style>
     #detailsbackimg{
         background-image: url("@Model.BackdropUrl");
