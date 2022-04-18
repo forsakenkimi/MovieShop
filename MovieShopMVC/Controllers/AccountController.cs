@@ -48,6 +48,10 @@ namespace MovieShopMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterModel model)
         {
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
             bool user = await _accountService.RegisterUser(model);
             return RedirectToAction("Login");
         }
