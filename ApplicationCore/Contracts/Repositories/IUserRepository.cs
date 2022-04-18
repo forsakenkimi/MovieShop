@@ -17,5 +17,13 @@ namespace ApplicationCore.Contracts.Repositories
         Task RemoveMovieFavorite(int userId, int movieId);
         Task <List<Favorite>> GetAllFavoritesForUser(int userId);
         Task<List<MovieCardModel>> GetAllFavoritesMovieCardForUser(int userId);
+
+        Task<Review> AddMovieReview (int movieId, int userId, decimal rating, string reviewText);
+
+        Task<Review> UpdateMovieReview(int movieId, int userId, decimal rating, string reviewText);
+
+        Task<Review> DeleteMovieReview (int userId, int movieId);
+
+        Task<Review> GetAllReviewsByUser(int userId);
     }
 }

@@ -15,16 +15,17 @@ namespace MovieShopMVC.Controllers
             _userService = userService;
         }
         //created by myself
-        //private int GetUserId() {
-        //    var userId = Convert.ToInt32(this.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
-        //    return userId;
-        //}
+        private int GetUserId()
+        {
+            var userId = Convert.ToInt32(this.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            return userId;
+        }
 
         [HttpGet]
         public async Task<IActionResult> Purchases()
         {
-            //int userId = GetUserId();
-            var purchaseMovieCard = await _userService.PurchaseMovie(15643);
+            int userId = GetUserId();
+            var purchaseMovieCard = await _userService.PurchaseMovie(userId);
             return View(purchaseMovieCard);
         }
 

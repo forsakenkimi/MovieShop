@@ -98,5 +98,24 @@ namespace Infrastructure.Repositories
             return movieCards;
         }
 
+        public Task<Review> AddMovieReview(int movieId, int userId, decimal rating, string reviewText)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Review> UpdateMovieReview(int movieId, int userId, decimal rating, string reviewText)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Review> DeleteMovieReview(int userId, int movieId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Review> GetAllReviewsByUser(int userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
