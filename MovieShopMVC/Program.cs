@@ -17,6 +17,7 @@ builder.Services.AddScoped<ICastService, CastService>();
 builder.Services.AddScoped<ICastRepository, CastRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddDbContext<MovieShopDbContext>(Options =>
 {

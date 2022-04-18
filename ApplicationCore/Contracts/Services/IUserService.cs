@@ -9,6 +9,6 @@ namespace ApplicationCore.Contracts.Services
 {
     public interface IUserService
     {
-        
+        Task<IEnumerable<PurchaseMovieCardModel>> PurchaseMovie(int UserId);
     }
 }

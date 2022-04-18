@@ -1,0 +1,20 @@
+﻿@model List<ApplicationCore.Models.PurchaseMovieCardModel>
+
+
+@{
+    ViewData["Title"] = "Purchase Page";
+}
+
+<div class="rounded">
+    <div class="container-fluid">
+        <div class="row">
+
+            @foreach (var movie in Model)
+            {               
+                <div class="col-xl-2 col-sm-4 col-md-3 col-6">
+                    <partial name = "_MovieCard" model = "movie.movieCard"/>
+                </div>
+            }          
+        </div>
+    </div>
+</div>
