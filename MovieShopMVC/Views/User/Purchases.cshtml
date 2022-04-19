@@ -10,11 +10,33 @@
         <div class="row">
 
             @foreach (var movie in Model)
-            {               
+            {
                 <div class="col-xl-2 col-sm-4 col-md-3 col-6 m-0">
-                    <partial name = "_MovieCard" model = "movie.movieCard"/>
+                    <partial name="_MovieCard" model="movie.movieCard" />
+                     <!-- Button trigger modal -->
+                <div class ="m-0 p-0">
+                <button type="button" class="btn btn-primary m-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Purchase Details
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            }          
+                </div>
+                </div>
+               
+            }
         </div>
     </div>
 </div>
