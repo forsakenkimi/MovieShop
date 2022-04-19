@@ -1,4 +1,8 @@
-﻿ <!-- Button trigger modal -->
+﻿@using System.Security.Claims
+@model ApplicationCore.Models.MovieDetailModel
+@{string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;}
+
+ <!-- Button trigger modal -->
 <button type="button" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#reviewModal">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -14,10 +18,10 @@
             </div>
             <div class="modal-body">
                 <!-- form start -->
-                <form>
+                <form asp-controller="user" asp-action="movieReview">
                     <div class="form-group">
                         <label for="ratingFormControlSelect1">Rating</label>
-                        <select class="form-control" id="ratingFormControlSelect1">
+                        <select name="rating" class="form-control" id="ratingFormControlSelect1">
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -31,16 +35,23 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Please write your review of the movie</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <input type="hidden" id="userId" name="userId" value="@userId">
                     </div>
+                    <div class="form-group">
+                    <input type="hidden" id="movieId" name="movieId" value=@Model.Id>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Please write your review of the movie</label>
+                        <textarea name="review" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-secondary" value="Submit">
+                    </div>                   
                 </form>
                 <!-- form end -->
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+
         </div>
     </div>
 </div>
