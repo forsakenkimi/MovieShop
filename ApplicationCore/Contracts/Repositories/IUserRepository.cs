@@ -24,6 +24,12 @@ namespace ApplicationCore.Contracts.Repositories
 
         Task<Review> DeleteMovieReview (int userId, int movieId);
 
-        Task <List<Review>> GetAllReviewsByUser(int userId);
+        Task<List<Review>> GetAllReviewsByUser(int userId);
+
+        Task<Purchase> PurchaseMovie(PurchaseRequestModel purchaseRequest, int userId);
+
+        Task<Favorite> AddFavorite(FavoriteRequestModel favoriteRequest);
+
+        Task<Review> AddMovieReview(ReviewRequestModel reviewRequest);
     }
 }

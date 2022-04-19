@@ -101,5 +101,24 @@ namespace Infrastructure.Services
         {
             return _userRepository.GetAllReviewsByUser(userId);
         }
+
+        public async Task<Purchase> PurchaseMovie(PurchaseRequestModel purchaseRequest, int userId)
+        {
+           var purchase = await _userRepository.PurchaseMovie(purchaseRequest, userId);
+
+            return purchase;
+        }
+
+        public async Task<Favorite> AddFavorite(FavoriteRequestModel favoriteRequest)
+        {
+            var favorite = await _userRepository.AddFavorite(favoriteRequest);
+            return favorite;
+        }
+
+        public async Task<Review> AddMovieReview(ReviewRequestModel reviewRequest)
+        {
+            var review = await _userRepository.AddMovieReview(reviewRequest);
+            return review;
+        }
     }
 }

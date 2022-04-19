@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Contracts.Services;
+using ApplicationCore.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -37,5 +38,27 @@ namespace MovieShopMVC.Controllers
             var movieCards = await _userService.GetAllFavoritesMovieCard(userId);
             return View(movieCards);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> MoviePurchase(PurchaseRequestModel purchaseRequest)
+        {
+            int id = purchaseRequest.UserId;
+            var purchase = await _userService.PurchaseMovie(purchaseRequest, id); 
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> MovieFavorite(FavoriteRequestModel favoriteRequest)
+        {           
+            var favorite = await _userService.AddFavorite(favoriteRequest);
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> MovieReview(ReviewRequestModel reviewRequest)
+        {
+            var review = await _userService.AddMovieReview(reviewRequest);
+            return View();
+        }
+
     }
 }

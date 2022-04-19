@@ -118,5 +118,45 @@ namespace Infrastructure.Repositories
             var reviews =  await _dbContext.Reviews.Where(r => r.UserId == userId).ToListAsync();
             return reviews;
         }
+
+        public async Task<Purchase> PurchaseMovie(PurchaseRequestModel purchaseRequest, int userId)
+        {
+            Purchase purchase = new Purchase()
+            {
+                UserId = purchaseRequest.UserId,
+                PurchaseNumber = purchaseRequest.PurchaseNumber,
+                TotalPrice = purchaseRequest.TotalPrice,
+                PurchaseDateTime = purchaseRequest.PurchaseDateTime,
+                MovieId = purchaseRequest.MovieId,
+            };
+            _dbContext.Purchases.Add(purchase);
+            await _dbContext.SaveChangesAsync();
+            return purchase;
+        }
+
+        public async Task<Favorite> AddFavorite(FavoriteRequestModel favoriteRequest)
+        {
+            Favorite favorite = new Favorite() { 
+                UserId = favoriteRequest.UserId,
+                MovieId =favoriteRequest.MovieId,
+            };
+            _dbContext.Favorites.Add(favorite);
+            await _dbContext.SaveChangesAsync();
+            return favorite;
+        }
+
+        public async Task<Review> AddMovieReview(ReviewRequestModel reviewRequest)
+        {
+            Review review = new Review()
+            {
+                MovieId = reviewRequest.MovieId,
+                UserId = reviewRequest.UserId,
+                Rating = reviewRequest.Rating,
+                ReviewText = reviewRequest.ReviewText,
+            };
+            _dbContext.Reviews.Add(review);
+            await _dbContext.SaveChangesAsync();
+            return review;
+        }
     }
 }
