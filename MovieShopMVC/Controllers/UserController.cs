@@ -54,10 +54,17 @@ namespace MovieShopMVC.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> MovieReview(string review, int rating, int userId, int movieId)
+        public async Task<IActionResult> MovieReview(string reviewText, int rating, int userId, int movieId)
         {
-            //var review = await _userService.AddMovieReview(reviewRequest);
-            return View();
+            var reviewRequest = new ReviewRequestModel()
+            {
+                MovieId = movieId,
+                UserId = userId,
+                ReviewText = reviewText,
+                Rating = rating,
+            };
+            var review = await _userService.AddMovieReview(reviewRequest);
+            return RedirectToAction("Details", "Movies", new { id = movieId });
         }
 
     }
