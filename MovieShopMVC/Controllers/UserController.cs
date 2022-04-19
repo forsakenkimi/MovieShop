@@ -39,13 +39,13 @@ namespace MovieShopMVC.Controllers
             return View(movieCards);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> MoviePurchase(PurchaseRequestModel purchaseRequest)
-        //{
-        //    int id = purchaseRequest.UserId;
-        //    var purchase = await _userService.PurchaseMovie(purchaseRequest, id); 
-        //    return View();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> MoviePurchase(PurchaseRequestModel purchaseRequest)
+        {
+            int id = purchaseRequest.UserId;
+            var purchase = await _userService.PurchaseMovie(purchaseRequest, id);
+            return View();
+        }
 
         //[HttpPost]
         //public async Task<IActionResult> MovieFavorite(FavoriteRequestModel favoriteRequest)
