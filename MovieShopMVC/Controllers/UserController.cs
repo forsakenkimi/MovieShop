@@ -39,26 +39,26 @@ namespace MovieShopMVC.Controllers
             return View(movieCards);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> MoviePurchase(PurchaseRequestModel purchaseRequest)
-        {
-            int id = purchaseRequest.UserId;
-            var purchase = await _userService.PurchaseMovie(purchaseRequest, id); 
-            return View();
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> MoviePurchase(PurchaseRequestModel purchaseRequest)
+        //{
+        //    int id = purchaseRequest.UserId;
+        //    var purchase = await _userService.PurchaseMovie(purchaseRequest, id); 
+        //    return View();
+        //}
 
-        [HttpPost]
-        public async Task<IActionResult> MovieFavorite(FavoriteRequestModel favoriteRequest)
-        {           
-            var favorite = await _userService.AddFavorite(favoriteRequest);
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> MovieReview(ReviewRequestModel reviewRequest)
-        {
-            var review = await _userService.AddMovieReview(reviewRequest);
-            return View();
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> MovieFavorite(FavoriteRequestModel favoriteRequest)
+        //{           
+        //    var favorite = await _userService.AddFavorite(favoriteRequest);
+        //    return View();
+        //}
+        //[HttpPost]
+        //public async Task<IActionResult> MovieReview(ReviewRequestModel reviewRequest)
+        //{
+        //    var review = await _userService.AddMovieReview(reviewRequest);
+        //    return View();
+        //}
 
     }
 }

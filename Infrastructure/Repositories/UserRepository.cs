@@ -97,7 +97,6 @@ namespace Infrastructure.Repositories
             };
             return movieCards;
         }
-
         public Task<Review> AddMovieReview(int movieId, int userId, decimal rating, string reviewText)
         {
             throw new NotImplementedException();
@@ -108,9 +107,17 @@ namespace Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Review> DeleteMovieReview(int userId, int movieId)
+        public async Task<bool> DeleteMovieReview(int userId, int movieId)
         {
-            throw new NotImplementedException();
+            Review review = new Review()
+            {
+                MovieId = movieId,
+                UserId = userId,
+
+            };
+            _dbContext.Reviews.Remove(review);
+            await _dbContext.SaveChangesAsync();
+            return true;
         }
 
         public async Task<List<Review>> GetAllReviewsByUser(int userId)
@@ -155,6 +162,32 @@ namespace Infrastructure.Repositories
                 ReviewText = reviewRequest.ReviewText,
             };
             _dbContext.Reviews.Add(review);
+            await _dbContext.SaveChangesAsync();
+            return review;
+        }
+
+        public async Task<bool> RemoveFavorite(FavoriteRequestModel favoriteRequest)
+        {
+            Favorite favorite = new Favorite()
+            {
+                UserId = favoriteRequest.UserId,
+                MovieId = favoriteRequest.MovieId,
+            };
+            _dbContext.Favorites.Remove(favorite);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }        
+
+        public async Task<Review> UpdateMovieReview(ReviewRequestModel reviewRequest)
+        {
+            Review review = new Review()
+            {
+                MovieId = reviewRequest.MovieId,
+                UserId = reviewRequest.UserId,
+                Rating = reviewRequest.Rating,
+                ReviewText = reviewRequest.ReviewText,
+            };
+            _dbContext.Reviews.Update(review);
             await _dbContext.SaveChangesAsync();
             return review;
         }

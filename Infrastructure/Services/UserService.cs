@@ -120,5 +120,21 @@ namespace Infrastructure.Services
             var review = await _userRepository.AddMovieReview(reviewRequest);
             return review;
         }
+
+        public async Task<bool> RemoveFavorite(FavoriteRequestModel favoriteRequest)
+        {
+            return await _userRepository.RemoveFavorite(favoriteRequest);
+            
+        }
+
+        public async Task<bool> DeleteMovieReview(int userId, int movieId)
+        {
+            return await _userRepository.DeleteMovieReview(userId, movieId);
+        }
+
+        public async Task<Review> UpdateMovieReview(ReviewRequestModel reviewRequest)
+        {
+            return await _userRepository.UpdateMovieReview(reviewRequest);
+        }
     }
 }

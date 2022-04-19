@@ -26,5 +26,8 @@ namespace ApplicationCore.Contracts.Services
         Task<List<Review>> GetAllReviewsByUserId(int userId);
 
         Task<Review> AddMovieReview(ReviewRequestModel reviewRequest);
+
+        Task<bool> DeleteMovieReview(int userId, int movieId);
+        Task<Review> UpdateMovieReview(ReviewRequestModel reviewRequest);
     }
 }
