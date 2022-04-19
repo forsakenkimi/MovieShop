@@ -40,11 +40,20 @@ namespace MovieShopMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> MoviePurchase(PurchaseRequestModel purchaseRequest)
+        public async Task<IActionResult> MoviePurchase(int userId, int movieId, string purchaseNumber, decimal totalPrice,
+            DateTime purchaseDateTime)
         {
-            int id = purchaseRequest.UserId;
+            var purchaseRequest = new PurchaseRequestModel()
+            {
+                UserId = userId,
+                PurchaseDateTime = purchaseDateTime,
+                PurchaseNumber = purchaseNumber,
+                TotalPrice = totalPrice,
+                MovieId = movieId,
+            };
+            int id = userId;
             var purchase = await _userService.PurchaseMovie(purchaseRequest, id);
-            return View();
+            return RedirectToAction("Details", "Movies", new { id = movieId });
         }
 
         [HttpPost]
