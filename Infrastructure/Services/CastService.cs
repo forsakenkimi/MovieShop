@@ -50,6 +50,7 @@ namespace Infrastructure.Services
                     Price = movie.Movie.Price,
                 });
             }
+
             return castDetails;
         }
     }

@@ -1,8 +1,10 @@
 ﻿using ApplicationCore.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -120,6 +122,12 @@ namespace Infrastructure.Data
             builder.HasKey(r => new {r.UserId, r.MovieId });
             builder.Property(r => r.Rating).HasColumnType("decimal(3, 2)");
 
+        }
+        //Dapper
+        public SqlConnection GetConnection()
+        {
+            string conn = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("MovieShopDbConnection");
+            return new SqlConnection(conn);
         }
     }
 }

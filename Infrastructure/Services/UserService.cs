@@ -19,6 +19,8 @@ namespace Infrastructure.Services
             _userRepository = userRepository;
         }
 
+
+
         public async Task<List<int>> GetAllPurchasesMovieId(int userId)
         {
             var purchases = await _userRepository.GetAllPurchasesForUser(userId);

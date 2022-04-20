@@ -29,7 +29,7 @@ namespace MovieShopMVC.Controllers
             {
                 int userId = Convert.ToInt32(this.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);                
             }
-             
+            
             return View(movieDetails);
         }
 
