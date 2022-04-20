@@ -97,5 +97,35 @@ namespace MovieShopMVC.Controllers
             await _userService.DeleteMovieReview(userId, movieId);
             return RedirectToAction("Details", "Movies", new { id = movieId });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateMovieReview(string reviewText, int rating, int userId, int movieId)
+        {
+            var reviewRequest = new ReviewRequestModel()
+            {
+                MovieId = movieId,
+                UserId = userId,
+                ReviewText = reviewText,
+                Rating = rating,
+            };
+            var review = await _userService.UpdateMovieReview(reviewRequest);
+            return RedirectToAction("Details", "Movies", new { id = movieId });
+        }
+
+        public async Task<IActionResult> TwoSubmitsForm(string reviewText, int rating, int userId, int movieId, string command)
+        {
+            if(command == "Delete")
+            {
+                await DeleteMovieReview(userId, movieId);
+
+            }
+            else
+            {
+                await UpdateMovieReview(reviewText, rating, userId, movieId);
+            }
+
+            return RedirectToAction("Details", "Movies", new { id = movieId });
+        }
+
     }
 }
