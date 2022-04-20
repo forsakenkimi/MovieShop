@@ -48,7 +48,7 @@
             </div>
 
             <div class="col-6" >
-                <p class="fs-2 text-white">@Model.Title</p>
+                <p class="fs-2 text-white">@Model.Title<partial name = "_FavoriteToggle"/></p>
                 <p class="fs-6 text-secondary">@Model.Tagline</p>
                 <span class="fs-6 text-secondary"> @Model.RunTime m | @timeArr[0] </span>  
                 @foreach (var genre in Model.Genres)
@@ -79,7 +79,6 @@
                         <partial name = "_ReviewButton"/>
                     }
                     
-                    <br/>
                     <br/>
                     
                     if (movieIdList.Contains(Model.Id)){

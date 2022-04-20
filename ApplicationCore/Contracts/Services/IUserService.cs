@@ -29,5 +29,7 @@ namespace ApplicationCore.Contracts.Services
 
         Task<bool> DeleteMovieReview(int userId, int movieId);
         Task<Review> UpdateMovieReview(ReviewRequestModel reviewRequest);
+
+        Task<List<Favorite>> GetAllFavoritesByUserId(int userId);
     }
 }

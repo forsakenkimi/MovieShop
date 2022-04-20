@@ -136,5 +136,10 @@ namespace Infrastructure.Services
         {
             return await _userRepository.UpdateMovieReview(reviewRequest);
         }
+
+        public async Task<List<Favorite>> GetAllFavoritesByUserId(int userId)
+        {
+            return await _userRepository.GetAllFavoritesForUser(userId);
+        }
     }
 }

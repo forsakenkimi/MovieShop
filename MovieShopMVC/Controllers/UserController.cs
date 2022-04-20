@@ -57,11 +57,26 @@ namespace MovieShopMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> MovieFavorite(FavoriteRequestModel favoriteRequest)
+        public async Task<IActionResult> MovieFavorite(int movieId, int userId)
         {
+            var favoriteRequest = new FavoriteRequestModel()
+            {
+                MovieId = movieId,
+                UserId = userId
+            };
+
             var favorite = await _userService.AddFavorite(favoriteRequest);
-            return View();
+            return RedirectToAction("Details", "Movies", new { id = movieId });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveMovieFavorite(int movieId, int userId)
+        {
+            await _userService.RemoveFavorite(userId, movieId);
+            return RedirectToAction("Details", "Movies", new { id = movieId });
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> MovieReview(string reviewText, int rating, int userId, int movieId)
         {
@@ -76,5 +91,11 @@ namespace MovieShopMVC.Controllers
             return RedirectToAction("Details", "Movies", new { id = movieId });
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteMovieReview(int userId, int movieId)
+        {
+            await _userService.DeleteMovieReview(userId, movieId);
+            return RedirectToAction("Details", "Movies", new { id = movieId });
+        }
     }
 }
