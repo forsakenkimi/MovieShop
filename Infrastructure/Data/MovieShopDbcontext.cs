@@ -124,11 +124,12 @@ namespace Infrastructure.Data
 
         }
         //Dapper
-        public SqlConnection GetConnection()
-        {
-            string conn = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("MovieShopDbConnection");
-            return new SqlConnection(conn);
-        }
+        //public SqlConnection GetConnection()
+        //{
+        //    string abc = new ConfigurationBuilder().Build().GetConnectionString("MovieShopDbConnection");
+        //    string conn = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("MovieShopDbConnection");
+        //    return new SqlConnection(conn);
+        //}
     }
 }
 

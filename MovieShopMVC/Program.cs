@@ -47,7 +47,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseMovieShopExceptionMiddleware();
+//app.UseMovieShopExceptionMiddleware();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

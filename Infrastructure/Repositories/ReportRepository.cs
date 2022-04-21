@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Infrastructure.Repositories
 {
@@ -22,7 +23,8 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<MoviesReportModel>> GetTopPurchasedMovies(DateTime? fromDate = null, DateTime? toDate = null, int pageSize = 30, int pageIndex = 1)
         {
-            IDbConnection conn =_dbContext.GetConnection();
+            string connString = _dbContext.Database.GetConnectionString();
+            IDbConnection conn = new SqlConnection(connString);
             var procedure = "[usp_GetTopPurchasedMovies]";
             var values = new 
             {
