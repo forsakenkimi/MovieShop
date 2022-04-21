@@ -5,6 +5,7 @@ using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using MovieShopMVC.Middlewares;
 using MovieShopMVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,6 +47,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseMovieShopExceptionMiddleware();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

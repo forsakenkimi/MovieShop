@@ -6,6 +6,7 @@ using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using MovieShopAPI.Middlewares;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -47,6 +48,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMovieShopExceptionMiddleware();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
