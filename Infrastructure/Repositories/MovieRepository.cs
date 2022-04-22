@@ -26,7 +26,16 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<Movie>> Get30HighestRatedMovies()
         {
-            throw new NotImplementedException();
+            var GroupedMovieRatings = await _dbContext.Reviews.GroupBy(r => r.MovieId).
+                Select(gr => new {MovieId = gr.Key, AvgRating = gr.Average(r => r.Rating) }).OrderByDescending(gmr => gmr.AvgRating).Take(30).ToListAsync();
+            var movies = new List<Movie>();
+            foreach (var MovieRating in GroupedMovieRatings)
+            {
+                Movie movie = await GetById(MovieRating.MovieId);
+                movie.Rating = MovieRating.AvgRating;
+                movies.Add(movie);
+            }
+            return movies;
         }
 
         public override async Task<Movie> GetById(int id)

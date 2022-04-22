@@ -38,8 +38,25 @@ namespace Infrastructure.Services
             return movieCards;
         }
 
+        public async Task<List<MovieCardModel>> Get30HighestRatedMovies()
+        {
+            var movies = await _movieRepository.Get30HighestRatedMovies();
+            //AutoMapper
+            var movieCards = new List<MovieCardModel>();
+            foreach (var movie in movies)
+            {
+                movieCards.Add(new MovieCardModel
+                {
+                    Title = movie.Title,
+                    Id = movie.Id,
+                    PosterUrl = movie.PosterUrl,
+                });
+            }
+            return movieCards;
+        }
+
         //before async
-         public async Task<MovieDetailModel> GetMovieDetails(int id)
+        public async Task<MovieDetailModel> GetMovieDetails(int id)
         {
             var movie = await _movieRepository.GetById(id);
             if(movie== null)

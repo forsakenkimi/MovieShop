@@ -27,6 +27,21 @@ namespace MovieShopAPI.Controllers
             return Ok(pagedMovieCard);
         }
 
+
+        //Get30HighestRatedMovies()
+        [HttpGet]
+        [Route("top-rated")]
+        public async Task<IActionResult> Get30HighestRatedMovies()
+        {
+            var movies = await _movieService.Get30HighestRatedMovies();
+            if (!movies.Any())
+            {
+                return NotFound(new { errorMessage = "No Movies Found" });
+            }
+            return Ok(movies);
+        }
+
+
         [HttpGet]
         [Route("top-grossing")]
         public async Task<IActionResult> GetTopRevenueMovies()
