@@ -31,5 +31,7 @@ namespace ApplicationCore.Contracts.Services
         Task<Review> UpdateMovieReview(ReviewRequestModel reviewRequest);
 
         Task<List<Favorite>> GetAllFavoritesByUserId(int userId);
+
+        Task<PurchaseMovieCardModel> PurchaseMovieByMovieId(int movieId, int userId);
     }
 }

@@ -6,8 +6,7 @@ using System.Security.Claims;
 
 namespace MovieShopMVC.Controllers
 {
-    //[Authorize]
-
+    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -26,7 +25,7 @@ namespace MovieShopMVC.Controllers
         public async Task<IActionResult> Purchases()
         {
             int userId = GetUserId();
-            var purchaseMovieCard = await _userService.PurchaseMovie(42);
+            var purchaseMovieCard = await _userService.PurchaseMovie(userId);
             return View(purchaseMovieCard);
         }
 

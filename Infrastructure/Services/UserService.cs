@@ -143,5 +143,34 @@ namespace Infrastructure.Services
         {
             return await _userRepository.GetAllFavoritesForUser(userId);
         }
+
+        public async Task<PurchaseMovieCardModel> PurchaseMovieByMovieId(int movieId, int userId)
+        {
+            var purchaseMovieCard = new PurchaseMovieCardModel();
+            var purchases = await _userRepository.GetAllPurchasesForUser(userId);
+            foreach (var purchase in purchases)
+            {
+                if (purchase.MovieId == movieId) {
+                    var purchaseMovieDetail = await _userRepository.GetPurchasesDetails(userId, purchase.MovieId);
+                    purchaseMovieCard = new PurchaseMovieCardModel
+                    {
+                        movieCard = new MovieCardModel
+                        {
+                            Id = purchase.MovieId,
+                            Title = purchaseMovieDetail.Title,
+                            PosterUrl = purchaseMovieDetail.PosterUrl,
+                        },
+                        purchaseId = purchase.Id,
+                        UserId = userId,
+                        PurchaseNumber = purchase.PurchaseNumber,
+                        TotalPrice = purchase.TotalPrice,
+                        PurchaseDateTime = purchase.PurchaseDateTime,
+
+                    };
+                }
+                
+            }
+            return purchaseMovieCard;
+        }
     }
 }
