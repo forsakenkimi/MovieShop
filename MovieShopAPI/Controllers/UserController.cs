@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Contracts.Services;
+using ApplicationCore.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -56,6 +57,28 @@ namespace MovieShopAPI.Controllers
                 return NotFound(new { errorMessage = "No Purchase Found For UserId" });
             }
             return Ok(purchaseMovieCard);
+        }
+
+        [HttpPost]
+        [Route("favorite")]
+        public async Task<IActionResult> MovieFavorite(int movieId, int userId)
+        {
+            var favoriteRequest = new FavoriteRequestModel()
+            {
+                MovieId = movieId,
+                UserId = userId
+            };
+
+            var favorite = await _userService.AddFavorite(favoriteRequest);
+            return Ok(favorite);
+        }
+
+        [HttpPost]
+        [Route("un-favorite")]
+        public async Task<IActionResult> RemoveMovieFavorite(int movieId, int userId)
+        {
+            await _userService.RemoveFavorite(userId, movieId);
+            return Ok();
         }
     }
 }
