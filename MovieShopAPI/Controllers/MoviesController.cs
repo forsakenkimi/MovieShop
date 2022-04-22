@@ -54,7 +54,7 @@ namespace MovieShopAPI.Controllers
         [Route("genre/{genreId:int}")]
         public async Task<IActionResult> genres(int genreId, int pageSize = 30, int pageNumber = 1)
         {
-            var pagedMovieCard = await _movieService.GetMoviesByGenrePagination(id, pageSize, pageNumber);
+            var pagedMovieCard = await _movieService.GetMoviesByGenrePagination(genreId, pageSize, pageNumber);
             if (pagedMovieCard == null)
             {
                 return NotFound(new { errorMessage = "No Movie Found For GenreId" });
