@@ -172,5 +172,19 @@ namespace Infrastructure.Services
             }
             return purchaseMovieCard;
         }
+
+        public async Task<bool> IsMovieFavored(int userId, int movieId)
+        {
+            var movies = await _userRepository.GetAllFavoritesForUser(userId);
+            bool isFavored = false;
+            foreach (var movie in movies)
+            {
+                if (movie.MovieId == movieId)
+                {
+                    isFavored = true;
+                }
+            }
+            return isFavored;
+        }
     }
 }

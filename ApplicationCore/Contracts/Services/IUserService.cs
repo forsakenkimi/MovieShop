@@ -33,5 +33,8 @@ namespace ApplicationCore.Contracts.Services
         Task<List<Favorite>> GetAllFavoritesByUserId(int userId);
 
         Task<PurchaseMovieCardModel> PurchaseMovieByMovieId(int movieId, int userId);
+
+        Task<bool> IsMovieFavored(int userId, int movieId);
+
     }
 }
