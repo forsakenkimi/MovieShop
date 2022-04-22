@@ -139,5 +139,13 @@ namespace Infrastructure.Services
             MovieCards.AddRange(pagedMovies.Data.Select(m => new MovieCardModel { Id = m.Id, Title = m.Title, PosterUrl = m.PosterUrl }));
             return new PagedResultSet<MovieCardModel>(MovieCards, pageNumber, pageSize, pagedMovies.Count);
         }
+
+        public async Task<PagedResultSet<MovieReviewsModel>> GetReviewsByMoviePagination(int movieId, int pageSize = 30, int pageNumber = 1)
+        {
+            PagedResultSet<Review> pagedReviews = await _movieRepository.GetReviewsByMovies(movieId, pageSize, pageNumber);
+            List<MovieReviewsModel> MovieReviews = new List<MovieReviewsModel>();
+            MovieReviews.AddRange(pagedReviews.Data.Select(r => new MovieReviewsModel { UserId = r.UserId, Rating = r.Rating, ReviewText=r.ReviewText}));
+            return new PagedResultSet<MovieReviewsModel>(MovieReviews, pageNumber, pageSize, pagedReviews.Count);
+        }
     }
 }

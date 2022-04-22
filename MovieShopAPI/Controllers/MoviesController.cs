@@ -76,5 +76,16 @@ namespace MovieShopAPI.Controllers
             }
             return Ok(pagedMovieCard);
         }
+        [HttpGet]
+        [Route("{id:int}/reviews")]
+        public async Task<IActionResult> reviews(int id, int pageSize = 30, int pageNumber = 1)
+        {
+            var pagedReviews = await _movieService.GetReviewsByMoviePagination(id, pageSize, pageNumber);
+            if (pagedReviews == null)
+            {
+                return NotFound(new { errorMessage = "No Review Found For MovieId" });
+            }
+            return Ok(pagedReviews);
+        }
     }
 }
