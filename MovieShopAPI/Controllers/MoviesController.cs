@@ -13,6 +13,20 @@ namespace MovieShopAPI.Controllers
         {
             _movieService = movieService;
         }
+
+        //question how to make route /api/movies only
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> Movies(int pageSize = 30, int pageNumber = 1)
+        {
+            var pagedMovieCard = await _movieService.GetMoviesPagination(pageSize, pageNumber);
+            if (pagedMovieCard == null)
+            {
+                return NotFound(new { errorMessage = "No Movie Found For GenreId" });
+            }
+            return Ok(pagedMovieCard);
+        }
+
         [HttpGet]
         [Route("top-grossing")]
         public async Task<IActionResult> GetTopRevenueMovies()
@@ -34,6 +48,18 @@ namespace MovieShopAPI.Controllers
                 return NotFound(new { errorMessage = "No Movie Found For id" });
             }
             return Ok(movie);
+        }
+
+        [HttpGet]
+        [Route("{id : int}")]
+        public async Task<IActionResult> genres(int id, int pageSize = 30, int pageNumber = 1)
+        {
+            var pagedMovieCard = await _movieService.GetMoviesByGenrePagination(id, pageSize, pageNumber);
+            if (pagedMovieCard == null)
+            {
+                return NotFound(new { errorMessage = "No Movie Found For GenreId" });
+            }
+            return Ok(pagedMovieCard);
         }
     }
 }

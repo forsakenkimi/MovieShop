@@ -39,6 +39,22 @@ namespace Infrastructure.Repositories
             return movie;
         }
 
+        public async Task<PagedResultSet<Movie>> GetMovies(int pageSize = 30, int pageNumber = 1)
+        {
+            //Debug.WriteLine(_dbContext.MovieGenres.Where(mg => mg.GenreId == id).Count());
+            var totalMoviesCount = await _dbContext.Movies.CountAsync();
+
+            if (totalMoviesCount == 0)
+            {
+                throw new Exception("No Movies Found");
+            }
+            List<Movie> movies = await _dbContext.Movies.Select(mg => new Movie { Id = mg.Id, Title = mg.Title, PosterUrl = mg.PosterUrl })
+                .Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            PagedResultSet<Movie> pagedMovies = new PagedResultSet<Movie>(movies, pageNumber, pageSize, totalMoviesCount);
+            return pagedMovies;
+        }
+
         public async Task<PagedResultSet<Movie>> GetMoviesByGenres(int id, int pageSize = 30, int pageNumber = 1)
         {
             //Debug.WriteLine(_dbContext.MovieGenres.Where(mg => mg.GenreId == id).Count());
