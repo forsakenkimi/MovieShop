@@ -51,8 +51,8 @@ namespace MovieShopAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{id : int}")]
-        public async Task<IActionResult> genres(int id, int pageSize = 30, int pageNumber = 1)
+        [Route("genre/{genreId:int}")]
+        public async Task<IActionResult> genres(int genreId, int pageSize = 30, int pageNumber = 1)
         {
             var pagedMovieCard = await _movieService.GetMoviesByGenrePagination(id, pageSize, pageNumber);
             if (pagedMovieCard == null)
