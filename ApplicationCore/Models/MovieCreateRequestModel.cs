@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Models
 {
-    public class MovieCreateRequest
+    public class MovieCreateRequestModel
     {
         public int Id { get; set; }
         public string? Title { get; set; }
@@ -22,6 +22,6 @@ namespace ApplicationCore.Models
         public DateTime? ReleaseDate { get; set; }
         public int? RunTime { get; set; }
         public decimal? Price { get; set; }
-
+        public GenreModel? Genre { get; set; }
     }
 }

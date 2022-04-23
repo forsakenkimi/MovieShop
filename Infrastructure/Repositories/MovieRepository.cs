@@ -18,6 +18,41 @@ namespace Infrastructure.Repositories
         {
         }
 
+        public async Task<MovieGenre> AddMovieAndGenreByAdmin(int movieId, int genreId)
+        {
+            MovieGenre movieGenre = new MovieGenre()
+            {
+                MovieId = movieId,
+                GenreId = genreId,
+            };
+            await _dbContext.AddAsync<MovieGenre>(movieGenre);
+            return movieGenre;
+
+        }
+
+        //public async Task<MovieCreateRequestModel> AddMovieByAdmin(MovieCreateRequestModel movie)
+        //{
+        //    Movie AddedMovie = new Movie()
+        //    {
+        //        Title = movie.Title,
+        //        Overview = movie.Overview,
+        //        Tagline = movie.Tagline,
+        //        Budget = movie.Budget,
+        //        Revenue = movie.Revenue,
+        //        ImdbUrl = movie.ImdbUrl,
+        //        TmdbUrl = movie.TmdbUrl,
+        //        PosterUrl = movie.PosterUrl,
+        //        BackdropUrl = movie.BackdropUrl,
+        //        OriginalLanguage = movie.OriginalLanguage,
+        //        ReleaseDate = movie.ReleaseDate,
+        //        RunTime = movie.RunTime,
+        //        Price = movie.Price,
+        //    };
+        //    await _dbContext.AddAsync<Movie>(AddedMovie);
+        //    return movie;
+
+        //}
+
         public async Task<IEnumerable<Movie>> Get30HighestGrossingMovies()
         {
             var movies = await _dbContext.Movies.OrderByDescending(m=>m.Revenue).Take(30).ToListAsync();
@@ -47,6 +82,13 @@ namespace Infrastructure.Repositories
             movie.Rating = await _dbContext.Reviews.Where(m => m.MovieId == id).AverageAsync(m =>m.Rating);
             return movie;
         }
+
+        //public async Task<int> GetMovieIdByInfo(MovieCreateRequestModel movie)
+        //{
+            
+                    //this method is supposed to be created for [post] new movie
+
+        //}
 
         public async Task<PagedResultSet<Movie>> GetMovies(int pageSize = 30, int pageNumber = 1)
         {

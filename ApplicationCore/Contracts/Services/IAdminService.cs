@@ -10,5 +10,8 @@ namespace ApplicationCore.Contracts.Services
     public interface IAdminService
     {
         Task<IEnumerable<MoviesReportModel>> GetTopPurchasedMovies(DateTime? fromDate = null, DateTime? toDate = null, int pageSize = 30, int pageIndex = 1);
+        Task<MovieCreateRequestModel> AddMovieByAdmin(MovieCreateRequestModel movie);
+
+        Task<MovieCreateRequestModel> UpdateMovieByAdmin(MovieCreateRequestModel movie);
     }
 }

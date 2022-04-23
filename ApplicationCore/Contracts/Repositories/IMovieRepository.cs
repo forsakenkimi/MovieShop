@@ -21,6 +21,14 @@ namespace ApplicationCore.Contracts.Repositories
 
         Task<PagedResultSet<Review>> GetReviewsByMovies(int id, int pageSize = 30, int pageNumber = 1);
 
+        //Task<MovieCreateRequestModel> AddMovieByAdmin(MovieCreateRequestModel movie);
+
+        Task<MovieGenre> AddMovieAndGenreByAdmin(int movieId, int genreId);
+
+        //Task<int> GetMovieIdByInfo(MovieCreateRequestModel movie);
+
+
+
     }
 
 }
