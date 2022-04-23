@@ -12,5 +12,7 @@ namespace ApplicationCore.Contracts.Services
         public Task<UserInfoModel> ValidateUser(string email, string password);
 
         public Task<bool> RegisterUser(RegisterModel model);
+
+        public Task<bool> CheckUserExistByEmail(string email);
     }
 }

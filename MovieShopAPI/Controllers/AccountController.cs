@@ -71,5 +71,13 @@ namespace MovieShopAPI.Controllers
             var user = await _accountService.RegisterUser(model);
             return Ok(user);
         }
+
+        [HttpGet]
+        [Route("check-email")]
+        public async Task<IActionResult> CheckIfUserExistByEmail(string email)
+        {
+            var exist = await _accountService.CheckUserExistByEmail(email);
+            return Ok(exist);
+        }
     }
 }
